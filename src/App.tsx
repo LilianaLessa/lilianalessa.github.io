@@ -40,7 +40,13 @@ export default function App() {
           zIndex: 200,
         }}
       >
-        <LanguageSelector locale={locale} onChange={setLocale} />
+        <LanguageSelector
+  locale={locale}
+  onChange={(newLocale) => {
+    setLocale(newLocale);
+    localStorage.setItem(LOCALE_STORAGE_KEY, newLocale);
+  }}
+/>
       </div>
 
       {/* Main content */}
