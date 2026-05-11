@@ -19,7 +19,7 @@ export const translations: Record<Locale, Translations> = {
     github: "GitHub",
     linkedin: "LinkedIn",
     email: "Email",
-    footer: "© 2026 Liliana Lessa · Maia, Porto, Portugal",
+    footer: "© 2026 Liliana Lessa",
   },
   pt: {
     badge: "Em Construção",
@@ -29,7 +29,7 @@ export const translations: Record<Locale, Translations> = {
     github: "GitHub",
     linkedin: "LinkedIn",
     email: "E-mail",
-    footer: "© 2026 Liliana Lessa · Maia, Porto, Portugal",
+    footer: "© 2026 Liliana Lessa",
   },
 };
 
