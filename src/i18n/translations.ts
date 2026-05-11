@@ -32,3 +32,11 @@ export const translations: Record<Locale, Translations> = {
     footer: "© 2026 Liliana Lessa · Maia, Porto, Portugal",
   },
 };
+
+export const LOCALE_STORAGE_KEY = "portfolio-locale";
+
+export function getSavedLocale(): Locale {
+  const saved = localStorage.getItem(LOCALE_STORAGE_KEY);
+  if (saved === "en" || saved === "pt") return saved;
+  return "en"; // default to English
+}
