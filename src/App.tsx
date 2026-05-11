@@ -3,7 +3,7 @@ import Badge from "./components/Badge";
 import SkillChip from "./components/SkillChip";
 import SocialButton from "./components/SocialButton";
 import LanguageSelector from "./components/LanguageSelector";
-import { translations } from "./i18n/translations";
+import { translations, getSavedLocale, LOCALE_STORAGE_KEY } from "./i18n/translations";
 import type { Locale } from "./i18n/translations";
 
 const SKILLS: string[] = [
@@ -14,7 +14,7 @@ const SKILLS: string[] = [
 
 export default function App() {
   const [visible, setVisible] = useState<boolean>(false);
-  const [locale, setLocale] = useState<Locale>("en");
+  const [locale, setLocale] = useState<Locale>(getSavedLocale);
 
   const t = translations[locale];
 
