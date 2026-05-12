@@ -14,7 +14,10 @@ const STATUS_CONFIG = {
 };
 
 export default function Footer({ text, locale }: FooterProps) {
-  const status = useBuildStatus();
+  const {
+    status,
+    buildId,    
+  } = useBuildStatus();
   const cfg = STATUS_CONFIG[status];
   const buildTime = new Date(__BUILD_TIME__).toLocaleString(
     locale === "pt" ? "pt-PT" : "en-GB",
@@ -24,6 +27,8 @@ export default function Footer({ text, locale }: FooterProps) {
       timeZone: "Europe/Lisbon",
     }
   );
+
+  const buildLink = `https://github.com/LilianaLessa/lilianalessa.github.io/actions/runs/${buildId}`
 
   return (
     <footer
@@ -43,12 +48,12 @@ export default function Footer({ text, locale }: FooterProps) {
 
         {/* Deploy time */}
         <span style={{ fontSize: "0.72rem", color: "#4b5563" }}>
-          🕐 {locale === "pt" ? "Última build" : "Last build"}: {buildTime}
+          🕐 {locale === "pt" ? "Última build" : "Last build"} (#{buildId}): {buildTime} 
         </span>
 
         {/* Status badge */}
         <a
-          href="https://github.com/LilianaLessa/lilianalessa.github.io/actions/workflows/deploy.yml"
+          href={buildLink}
           target="_blank"
           rel="noopener noreferrer"
           style={{

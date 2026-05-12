@@ -1,10 +1,13 @@
 // src/hooks/useBuildStatus.ts
 import { useEffect, useState } from "react";
 
-type BuildStatus = "success" | "failure" | "in_progress" | "unknown";
+type BuildStatus = {
+  status: "success" | "failure" | "in_progress" | "unknown",
+  buildId?: string,
+}
 
 export function useBuildStatus(): BuildStatus {
-  const [status, setStatus] = useState<BuildStatus>("unknown");
+  const [status, setStatus] = useState<BuildStatus>({status:"unknown"});
 
   useEffect(() => {
     fetch(
@@ -14,13 +17,28 @@ export function useBuildStatus(): BuildStatus {
       .then((r) => r.json())
       .then((data) => {
         const run = data.workflow_runs?.[0];
-        if (!run) return;
-        if (run.conclusion === "success") setStatus("success");
-        else if (run.conclusion === "failure") setStatus("failure");
-        else if (run.status === "in_progress") setStatus("in_progress");
-        else setStatus("unknown");
+        if (!run) return;    
+        
+        const buildStatus: BuildStatus = {
+            status : "unknown",
+            buildId: run.id,
+        }
+        switch (run.conclusion) {
+          case "success":
+            buildStatus.status = "success";
+            break;
+          case "failure":
+            buildStatus.status = "failure";
+            break;
+          case "in_progress":
+            buildStatus.status = "in_progress";
+            break;
+          default:
+            buildStatus.status = "unknown";
+        }
+        setStatus(buildStatus);
       })
-      .catch(() => setStatus("unknown"));
+      .catch(() => setStatus({status:"unknown"}));
   }, []);
 
   return status;
