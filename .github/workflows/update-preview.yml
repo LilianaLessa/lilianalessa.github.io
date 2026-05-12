@@ -1,0 +1,47 @@
+# .github/workflows/update-preview.yml
+name: Update Preview Image
+on:
+  workflow_run:
+    workflows:
+      - "pages-build-deployment"   # exact name of your step 2 workflow
+    types:
+      - completed
+
+permissions:
+  contents: write
+
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: preview-image        # checkout the target branch
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+
+      - name: Install shot-scraper
+        run: |
+          pip install shot-scraper
+          shot-scraper install
+
+      - name: Wait propagation
+        run: |
+          sleep 30
+
+      - name: Take screenshot
+        run: |
+          shot-scraper https://lilianalessa.dev/ \
+            -o preview.png
+
+      - name: Commit and push to preview-image branch
+        run: |
+          git config user.name "Automated"
+          git config user.email "actions@users.noreply.github.com"
+          git add preview.png
+          git commit -m "Update preview $(date -u)" || exit 0
+          git push
