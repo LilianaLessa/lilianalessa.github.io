@@ -6,8 +6,8 @@ import LanguageSelector from "./components/LanguageSelector";
 import { translations, getSavedLocale, LOCALE_STORAGE_KEY } from "./i18n/translations";
 import type { Locale } from "./i18n/translations";
 import Footer from "./components/Footer";
-
 import ContactForm from "./components/ContactForm";
+import { useHCaptchaScript } from "./hooks/useHCaptchaScript";
 
 
 const SKILLS: string[] = [
@@ -19,6 +19,7 @@ const SKILLS: string[] = [
 export default function App() {
   const [visible, setVisible] = useState<boolean>(false);
   const [locale, setLocale] = useState<Locale>(getSavedLocale);
+   useHCaptchaScript(locale);
 
 
   const buildTime = new Date(__BUILD_TIME__).toLocaleString("en-GB", {
@@ -195,11 +196,11 @@ export default function App() {
     justifyContent: "center",
   }}
 >
-  <ContactForm t={t} />
+  <ContactForm locale={locale} t={t} />
 </div>
 
         {/* Footer */}
-        <p
+        <div
           className={visible ? "fade-up" : ""}
           style={{
             ...delay(650),
@@ -209,7 +210,7 @@ export default function App() {
           }}
         >
           <Footer text={t.footer} locale={locale} />
-        </p>
+        </div>
       </div>
     </div>
   );

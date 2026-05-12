@@ -19,7 +19,9 @@ export type Translations = {
   formSuccess: string;
   formError: string;
 
-  note: string
+  note: string;
+  contactCaptchaError: string;
+
 };
 
 export const translations: Record<Locale, Translations> = {
@@ -43,6 +45,7 @@ export const translations: Record<Locale, Translations> = {
     formError: "Something went wrong. Please try again.",
 
     note: "I also will use this space as my \"experimentation hub\". My plains include micro frontends and microservices to test technologies and stacks.",
+    contactCaptchaError: "Please fill out captcha field",
   },
   pt: {
     badge: "Em Construção",
@@ -64,6 +67,7 @@ export const translations: Record<Locale, Translations> = {
     formError: "Algo correu mal. Por favor tente novamente.", 
 
     note: "Também utilizarei este espaço como meu \"centro de experimentação\". Meus planos incluem micro front-ends e microsserviços para testar tecnologias e conjuntos de arquiteturas.",
+    contactCaptchaError: "Por favor preencha o captcha",
   },
 };
 

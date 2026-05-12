@@ -1,10 +1,11 @@
-import { useState } from "react";
-import type { Translations } from "../i18n/translations";
+import { useEffect, useRef, useState } from "react";
+import type { Locale, Translations } from "../i18n/translations";
 
 type Status = "idle" | "sending" | "success" | "error";
 
 type ContactFormProps = {
   t: Translations;
+  locale: Locale;
 };
 
 const INPUT_STYLE: React.CSSProperties = {
@@ -20,10 +21,42 @@ const INPUT_STYLE: React.CSSProperties = {
   fontFamily: "Segoe UI, system-ui, sans-serif",
 };
 
-export default function ContactForm({ t }: ContactFormProps) {
+export default function ContactForm({ t, locale }: ContactFormProps) {
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const widgetIdRef = useRef<string | null>(null);
+
+  useEffect(() => {
+
+    if (!open) return;
+
+        const renderCaptcha = () => {
+          const hcaptcha = (window as any).hcaptcha;
+          const el = document.getElementById("contact-form-captcha-container");
+          if (!hcaptcha || !el) {
+            // Script not ready yet — retry in 100ms
+            setTimeout(renderCaptcha, 100);
+            return;
+          }
+
+          // Reset existing widget if present
+          if (widgetIdRef.current !== null) {
+            return;
+          }
+
+          el.innerHTML = "";
+          hcaptcha.render("contact-form-captcha-container", {
+            captcha: "true",
+            render: "explicit",
+            theme: "dark",
+            sitekey: "50b2fe65-b00b-4b9e-ad62-3ba471098be2",
+          });
+        };
+
+        renderCaptcha();
+
+  }, [open, locale]);            
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -32,6 +65,16 @@ export default function ContactForm({ t }: ContactFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
+    const formElement = e.currentTarget;
+    const hCaptcha = formElement.querySelector<HTMLTextAreaElement>('textarea[name="h-captcha-response"]')
+      ?.value ?? "";
+
+    if (!hCaptcha) {
+        setStatus("error");
+        alert(t.contactCaptchaError)
+        return
+    }
+
 
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -139,7 +182,10 @@ export default function ContactForm({ t }: ContactFormProps) {
             rows={4}
             style={{ ...INPUT_STYLE, resize: "vertical" }}
           />
-
+          <div 
+            id="contact-form-captcha-container"
+            className="h-captcha"
+          ></div>
           <button
             type="submit"
             disabled={status === "sending"}
