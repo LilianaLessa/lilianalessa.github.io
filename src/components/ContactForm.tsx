@@ -21,39 +21,33 @@ const INPUT_STYLE: React.CSSProperties = {
   fontFamily: "Segoe UI, system-ui, sans-serif",
 };
 
+const renderCaptcha = () => {
+  const hcaptcha = (window as any).hcaptcha;
+  const el = document.getElementById("contact-form-captcha-container");
+  if (!hcaptcha || !el) {
+    // Script not ready yet — retry in 100ms
+    setTimeout(renderCaptcha, 100);
+    return;
+  }
+
+  el.innerHTML = "";
+  hcaptcha.render("contact-form-captcha-container", {
+    captcha: "true",
+    render: "explicit",
+    theme: "dark",
+    sitekey: "50b2fe65-b00b-4b9e-ad62-3ba471098be2",
+  });
+};
+
+
 export default function ContactForm({ t, locale }: ContactFormProps) {
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const widgetIdRef = useRef<string | null>(null);
 
   useEffect(() => {
 
     if (!open) return;
-
-        const renderCaptcha = () => {
-          const hcaptcha = (window as any).hcaptcha;
-          const el = document.getElementById("contact-form-captcha-container");
-          if (!hcaptcha || !el) {
-            // Script not ready yet — retry in 100ms
-            setTimeout(renderCaptcha, 100);
-            return;
-          }
-
-          // Reset existing widget if present
-          if (widgetIdRef.current !== null) {
-            return;
-          }
-
-          el.innerHTML = "";
-          hcaptcha.render("contact-form-captcha-container", {
-            captcha: "true",
-            render: "explicit",
-            theme: "dark",
-            sitekey: "50b2fe65-b00b-4b9e-ad62-3ba471098be2",
-          });
-        };
-
         renderCaptcha();
 
   }, [open, locale]);            
@@ -93,11 +87,14 @@ export default function ContactForm({ t, locale }: ContactFormProps) {
       if (data.success) {
         setStatus("success");
         setForm({ name: "", email: "", message: "" });
+        renderCaptcha();
       } else {
         setStatus("error");
+        renderCaptcha();
       }
     } catch {
       setStatus("error");
+      renderCaptcha();
     }
   };
 
