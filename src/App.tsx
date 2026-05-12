@@ -106,6 +106,20 @@ export default function App() {
           {t.description}
         </p>
 
+        {/* Note */}
+        <p
+          className={visible ? "fade-up" : ""}
+          style={{
+            ...delay(350),
+            maxWidth: "580px",
+            lineHeight: 1.75,
+            color: "#e9d5ff",
+            fontSize: "0.97rem",
+          }}
+        >
+          {t.note}
+        </p>
+
         {/* Skills */}
         <div
           className={visible ? "fade-up" : ""}
