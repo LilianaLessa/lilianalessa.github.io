@@ -6,6 +6,9 @@ import LanguageSelector from "./components/LanguageSelector";
 import { translations, getSavedLocale, LOCALE_STORAGE_KEY } from "./i18n/translations";
 import type { Locale } from "./i18n/translations";
 
+import ContactForm from "./components/ContactForm";
+
+
 const SKILLS: string[] = [
   "PHP 8", "Symfony 6", "TypeScript", "Node", "React",
   "MySQL", "Docker", "Kubernetes", "Apache Kafka", "Redis",
@@ -160,6 +163,18 @@ export default function App() {
             }
           />
         </div>
+
+<div
+  className={visible ? "fade-up" : ""}
+  style={{
+    ...delay(625),
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+  }}
+>
+  <ContactForm t={t} />
+</div>
 
         {/* Footer */}
         <p
