@@ -18,6 +18,8 @@ export type Translations = {
   formSending: string;
   formSuccess: string;
   formError: string;
+
+  note: string
 };
 
 export const translations: Record<Locale, Translations> = {
@@ -31,7 +33,7 @@ export const translations: Record<Locale, Translations> = {
     email: "Email",
     footer: "© 2026 Liliana Lessa",
 
-contactButton: "Contact Me",
+    contactButton: "Contact Me",
     formName: "Your name",
     formEmail: "Your email",
     formMessage: "Your message",
@@ -39,6 +41,8 @@ contactButton: "Contact Me",
     formSending: "Sending...",
     formSuccess: "Message sent! I'll get back to you soon.",
     formError: "Something went wrong. Please try again.",
+
+    note: "I also will use this space as my \"experimentation hub\". My plains include micro frontends and microservices to test technologies and stacks.",
   },
   pt: {
     badge: "Em Construção",
@@ -50,14 +54,16 @@ contactButton: "Contact Me",
     email: "E-mail",
     footer: "© 2026 Liliana Lessa",
 
- contactButton: "Contactar",
+    contactButton: "Contactar",
     formName: "O seu nome",
     formEmail: "O seu e-mail",
     formMessage: "A sua mensagem",
     formSend: "Enviar Mensagem",
     formSending: "A enviar...",
     formSuccess: "Mensagem enviada! Responderei em breve.",
-    formError: "Algo correu mal. Por favor tente novamente.",
+    formError: "Algo correu mal. Por favor tente novamente.", 
+
+    note: "Também utilizarei este espaço como meu \"centro de experimentação\". Meus planos incluem micro front-ends e microsserviços para testar tecnologias e conjuntos de arquiteturas.",
   },
 };
 
