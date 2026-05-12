@@ -5,6 +5,7 @@ import SocialButton from "./components/SocialButton";
 import LanguageSelector from "./components/LanguageSelector";
 import { translations, getSavedLocale, LOCALE_STORAGE_KEY } from "./i18n/translations";
 import type { Locale } from "./i18n/translations";
+import Footer from "./components/Footer";
 
 import ContactForm from "./components/ContactForm";
 
@@ -18,6 +19,13 @@ const SKILLS: string[] = [
 export default function App() {
   const [visible, setVisible] = useState<boolean>(false);
   const [locale, setLocale] = useState<Locale>(getSavedLocale);
+
+
+  const buildTime = new Date(__BUILD_TIME__).toLocaleString("en-GB", {
+    day: "2-digit", month: "short", year: "numeric",
+    hour: "2-digit", minute: "2-digit",
+    timeZone: "Europe/Lisbon",
+  });
 
   const t = translations[locale];
 
@@ -200,7 +208,7 @@ export default function App() {
             marginTop: "1rem",
           }}
         >
-          {t.footer}
+          <Footer text={t.footer} locale={locale} />
         </p>
       </div>
     </div>
