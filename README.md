@@ -8,3 +8,6 @@ You can check it at [lilianalessa.dev](http://lilianalessa.dev).
 I also will use it as my "experimentation hub".
 <br>
 My plains include micro frontends and microservices to test technologies and stacks.
+
+Last build preview:
+![Last build preview](https://github.com/LilianaLessa/lilianalessa.github.io/blob/preview-image/preview.png)

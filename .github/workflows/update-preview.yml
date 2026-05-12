@@ -31,12 +31,12 @@ jobs:
 
       - name: Wait propagation
         run: |
-          sleep 30
+          sleep 15
 
       - name: Take screenshot
         run: |
           shot-scraper https://lilianalessa.dev/ \
-            -o preview.png
+            -o preview.png --wait 5000
 
       - name: Commit and push to preview-image branch
         run: |
