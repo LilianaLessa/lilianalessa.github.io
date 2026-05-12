@@ -8,6 +8,16 @@ export type Translations = {
   linkedin: string;
   email: string;
   footer: string;
+
+
+  contactButton: string;
+  formName: string;
+  formEmail: string;
+  formMessage: string;
+  formSend: string;
+  formSending: string;
+  formSuccess: string;
+  formError: string;
 };
 
 export const translations: Record<Locale, Translations> = {
@@ -20,6 +30,15 @@ export const translations: Record<Locale, Translations> = {
     linkedin: "LinkedIn",
     email: "Email",
     footer: "© 2026 Liliana Lessa",
+
+contactButton: "Contact Me",
+    formName: "Your name",
+    formEmail: "Your email",
+    formMessage: "Your message",
+    formSend: "Send Message",
+    formSending: "Sending...",
+    formSuccess: "Message sent! I'll get back to you soon.",
+    formError: "Something went wrong. Please try again.",
   },
   pt: {
     badge: "Em Construção",
@@ -30,6 +49,15 @@ export const translations: Record<Locale, Translations> = {
     linkedin: "LinkedIn",
     email: "E-mail",
     footer: "© 2026 Liliana Lessa",
+
+ contactButton: "Contactar",
+    formName: "O seu nome",
+    formEmail: "O seu e-mail",
+    formMessage: "A sua mensagem",
+    formSend: "Enviar Mensagem",
+    formSending: "A enviar...",
+    formSuccess: "Mensagem enviada! Responderei em breve.",
+    formError: "Algo correu mal. Por favor tente novamente.",
   },
 };
 
