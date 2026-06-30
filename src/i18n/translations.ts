@@ -27,7 +27,7 @@ export type Translations = {
 export const translations: Record<Locale, Translations> = {
   en: {
     badge: "Under Construction",
-    role: "Software Engineer · Distributed Systems · E-commerce",
+    role: "AI Engineer (transitioning from backend Software Engineer) · Distributed Systems · E-commerce",
     description:
       "My portfolio is currently being built. In the meantime, feel free to explore my work on GitHub or connect with me on LinkedIn.",
     github: "GitHub",
@@ -49,7 +49,7 @@ export const translations: Record<Locale, Translations> = {
   },
   pt: {
     badge: "Em Construção",
-    role: "Engenheira de Software · Sistemas Distribuídos · E-commerce",
+    role: "Engenheira de IA (transicionando de Engenheira de Software backend) · Sistemas Distribuídos · E-commerce",
     description:
       "O meu portfólio está a ser construído. Enquanto isso, fique à vontade para explorar o meu trabalho no GitHub ou conectar-se comigo no LinkedIn.",
     github: "GitHub",
